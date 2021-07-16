@@ -1,4 +1,5 @@
-﻿using Salvo.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Salvo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,12 @@ namespace Salvo.Repositories
         public IEnumerable<Game> GetAllGames()
         {
             return FindAll().OrderByDescending(game => game.CreationDate);
+        }
+        public IEnumerable<Game> GetAllGamesWithPlayers()
+        {
+            return FindAll(source =>
+                source.Include(game => game.GamePlayers)
+                    .ThenInclude(GamePlayer => GamePlayer.Player)).OrderBy(game => game.CreationDate).ToList();
         }
     }
 }

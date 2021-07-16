@@ -17,5 +17,6 @@ namespace Salvo.Models
         public DbSet<Player> Players { get; set; }
         //hacer con las demas entidades que creemos en nuestro modelo
         public DbSet<Game> Games { get; set; }
+        public DbSet<GamePlayer> GamePlayers { get; set; }
     }
 }

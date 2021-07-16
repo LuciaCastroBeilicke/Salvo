@@ -27,7 +27,7 @@ namespace Salvo.Models
                 //gusrdar cambios en el contexto
                 context.SaveChanges();
             }
-           
+            
 
             if (!context.Games.Any())
             {
@@ -45,6 +45,36 @@ namespace Salvo.Models
                 foreach (Game g in Games)
                 {
                     context.Games.Add(g);
+                }
+                context.SaveChanges();
+            }
+            if (!context.GamePlayers.Any())
+            {
+                Game game1 = context.Games.Find(1L);
+                Game game2 = context.Games.Find(2L);
+                Game game3 = context.Games.Find(3L);
+                Game game4 = context.Games.Find(4L);
+
+                Player jbauer = context.Players.Find(1L);
+                Player obrian = context.Players.Find(2L);
+                Player kbauer = context.Players.Find(3L);
+                Player almeida = context.Players.Find(4L);
+
+                var gamesPlayers = new GamePlayer[]
+                {
+                    new GamePlayer {JoinDate=DateTime.Now, Game = game1, Player = jbauer },
+                    new GamePlayer {JoinDate=DateTime.Now, Game = game1, Player = obrian },
+                    new GamePlayer {JoinDate=DateTime.Now, Game = game2, Player = jbauer },
+                    new GamePlayer {JoinDate=DateTime.Now, Game = game2, Player = obrian },
+                    new GamePlayer {JoinDate=DateTime.Now, Game = game3, Player = obrian },
+                    new GamePlayer {JoinDate=DateTime.Now, Game = game3, Player = almeida },
+                    new GamePlayer {JoinDate=DateTime.Now, Game = game4, Player = obrian },
+                    new GamePlayer {JoinDate=DateTime.Now, Game = game4, Player = jbauer }
+
+                };
+                foreach(GamePlayer gp in gamesPlayers)
+                {
+                    context.GamePlayers.Add(gp);
                 }
                 context.SaveChanges();
             }
